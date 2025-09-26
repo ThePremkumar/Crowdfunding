@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const WalletDetails = () => {
   const { address, contract } = useStateContext();
-  const walletPlatform = "MetaMask"; // You can modify this dynamically if needed
+  const walletPlatform = "MetaMask"; 
   const navigate = useNavigate();
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useStateContext } from "../context";  
-import { logo, sun, payment } from "../assets";  // ✅ Import payment icon
+import { useStateContext } from "../context";
+import { logo, sun, payment } from "../assets";
 import { navlinks } from "../constants";
 
 const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
@@ -19,12 +19,13 @@ const Icon = ({ styles, name, imgUrl, isActive, disabled, handleClick }) => (
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { disconnectWallet, address } = useStateContext(); 
+  const { disconnectWallet, address } = useStateContext();
   const [isActive, setIsActive] = useState("dashboard");
+  const [theme, setTheme] = useState("dark"); // State for theme switching
 
   const handleNavClick = (link) => {
     if (link.name === "logout") {
-      handleLogout(); 
+      handleLogout();
     } else {
       setIsActive(link.name);
       navigate(link.link);
@@ -34,20 +35,33 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       if (typeof disconnectWallet !== "function") {
-        throw new Error("disconnectWallet is NOT a function! Ensure it's in context.");
+        throw new Error(
+          "disconnectWallet is NOT a function! Ensure it's in context."
+        );
       }
-      await disconnectWallet(); 
-      console.log("✅ Wallet disconnected successfully.");
-      navigate("/"); 
+      await disconnectWallet();
+      console.log("Wallet disconnected successfully.");
+      navigate("/");
     } catch (error) {
-      console.error(" Error disconnecting wallet:", error);
+      console.error("Error disconnecting wallet:", error);
     }
+  };
+
+  // 
+  // Fixed: Toggle background color correctly
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "dark" ? "light" : "dark";
+      document.body.style.backgroundColor =
+        newTheme === "dark" ? "#1c1c24" : "#ffffff";
+      return newTheme;
+    });
   };
 
   return (
     <div className="flex justify-between items-center flex-col sticky top-5 h-[93vh]">
       <Link to="/">
-        <Icon styles="w-[52px] h-[52px] bg-[#2c2f32]" imgUrl={logo} />
+        <Icon styles="w-[100px] h-[100px] bg-[#2c2f32]" imgUrl={logo} />
       </Link>
 
       <div className="flex-1 flex flex-col justify-between items-center bg-[#1c1c24] rounded-[20px] w-[76px] py-4 mt-12">
@@ -60,24 +74,14 @@ const Sidebar = () => {
               handleClick={() => handleNavClick(link)}
             />
           ))}
-
-          {/* Payment Icon - Navigates to Wallet Details */}
-          {address && (
-            <Icon
-              styles="bg-[#1c1c24] shadow-secondary"
-              imgUrl={payment}  // Use imported payment icon
-              handleClick={() => navigate("/wallet-details")} //  Navigates to the payment page
-            />
-          )}
         </div>
 
-        {address && (
-          <Icon
-            styles="bg-[#1c1c24] shadow-secondary"
-            imgUrl={sun}
-            handleClick={handleLogout} 
-          />
-        )}
+        {/*  Sun button now toggles theme properly */}
+        <Icon
+          styles="bg-[#1c1c24] shadow-secondary"
+          imgUrl={sun}
+          handleClick={toggleTheme}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { createCampaign, dashboard, logout, payment, profile, withdraw } from '../assets';
 
+
 export const navlinks = [
   {
     name: 'dashboard',
@@ -14,24 +15,23 @@ export const navlinks = [
   {
     name: 'payment',
     imgUrl: payment,
-    link: '/',
-    disabled: true,
+    link: '/wallet-details',
+    
   },
   {
-    name: 'withdraw',
+    name: 'explore',
     imgUrl: withdraw,
-    link: '/',
-    disabled: true,
+    link: '/explore',
   },
   {
     name: 'profile',
     imgUrl: profile,
     link: '/profile',
   },
-  {
-    name: 'logout',
-    imgUrl: logout,
-    link: '/', 
-    action: 'disconnect', 
-  },
+  // {
+  //   name: 'logout',
+  //   imgUrl: logout,
+  //   link: '/', 
+  //   action: 'disconnect', 
+  // },
 ];
