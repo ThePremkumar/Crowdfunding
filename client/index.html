@@ -5,52 +5,11 @@
     <link rel="website icon" type="png" href="src/assets/logo.png">
     <link rel="stylesheet" href="/client/src/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-
     <title>Crowdfuing</title>
-
-    <style>
-      
-        .n8n-chat-powered {
-            display: none !important;
-        }
-        .chat-message-markdown{
-            font-size: 90% !important;
-        }
-        .chat-message {
-            max-width: 86%;
-        }
-        .chat-window-wrapper .chat-window-toggle{
-            color: blue!;
-        }
-
-    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script type="module">
-      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-    
-      createChat({
-        webhookUrl: 'http://localhost:5678/webhook/ac273fdb-2660-4f61-b49f-662afec605cd/chat',
-        theme: {
-          header: {
-            title: 'My Custom Chat', 
-          },
-          launcher: {
-            labelOpen: 'Start Chat', 
-            labelClose: 'Close Chat'
-          },
-          chat: {
-            messageError: 'Sorry, something went wrong. Please try again.',
-            messageLoading: 'Processing your request...',
-            welcomeMessage: 'Welcome to our custom  chat! How can I help you today?',
-            placeholderMessage: 'Type your message here...'
-          }
-        }
-      });
-    </script>
 </body>
 </html>
   </body>
